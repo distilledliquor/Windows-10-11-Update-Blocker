@@ -4,23 +4,23 @@ $keyAU = 'Registry::HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'
 $dateStart = '0000-01-01T00:00:00Z'
 $dateEnd = '3000-12-31T11:59:59Z'
 $getWinver = (Get-WmiObject -class Win32_OperatingSystem).Caption
-New-ItemProperty -Force -Path $keyUX -PropertyType String -Name 'PauseFeatureUpdatesStartTime' -Value $dateStart
-New-ItemProperty -Force -Path $keyUX -PropertyType String -Name 'PauseQualityUpdatesStartTime' -Value $dateStart
-New-ItemProperty -Force -Path $keyUX -PropertyType String -Name 'PauseUpdatesStartTime' -Value $dateStart
-New-ItemProperty -Force -Path $keyUX -PropertyType String -Name 'PauseFeatureUpdatesEndTime' -Value $dateEnd
-New-ItemProperty -Force -Path $keyUX -PropertyType String -Name 'PauseQualityUpdatesEndTime' -Value $dateEnd
-New-ItemProperty -Force -Path $keyUX -PropertyType String -Name 'PauseUpdatesExpiryTime' -Value $dateEnd
+Set-ItemProperty -Path $keyUX -Name 'PauseFeatureUpdatesStartTime' -Value $dateStart
+Set-ItemProperty -Path $keyUX -Name 'PauseQualityUpdatesStartTime' -Value $dateStart
+Set-ItemProperty -Path $keyUX -Name 'PauseUpdatesStartTime' -Value $dateStart -EA SilentlyContinue
+Set-ItemProperty -Path $keyUX -Name 'PauseFeatureUpdatesEndTime' -Value $dateEnd
+Set-ItemProperty -Path $keyUX -Name 'PauseQualityUpdatesEndTime' -Value $dateEnd
+Set-ItemProperty -Path $keyUX -Name 'PauseUpdatesExpiryTime' -Value $dateEnd
 if ($getWinver.Contains("Windows 11")) {
-New-Item -Force -Path $keyAU
-New-ItemProperty -Force -Path $keyAU -PropertyType DWORD -Name 'NoAutoUpdate' -Value 1
+New-Item -Force -Path $keyAU > $null
+New-ItemProperty -Force -Path $keyAU -PropertyType DWORD -Name 'NoAutoUpdate' -Value 1 > $null
 }
 
 <# Completion message #>
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] > $null
 [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime] > $null
-[string] $L1 = 'Windows ¾÷µ¥ÀÌÆ®°¡ 3000³â 12¿ù 31ÀÏ¿¡ ´Ù½Ã ½ÃÀÛµË´Ï´Ù.'
-[string] $L2 = '¡¡'
-[string] $L3 = 'Windows ¾÷µ¥ÀÌÆ® Ã¢ÀÇ ¾÷µ¥ÀÌÆ® °è¼ÓÇÏ±â ¹öÆ°À» Å¬¸¯ÇÏ¿© Windows ¾÷µ¥ÀÌÆ® ±â´ÉÀ» º¹±¸ÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù.'
+[string] $L1 = 'Windows ì—…ë°ì´íŠ¸ê°€ 3000ë…„ 12ì›” 31ì¼ì— ë‹¤ì‹œ ì‹œìž‘ë©ë‹ˆë‹¤.'
+[string] $L2 = 'ã€€'
+[string] $L3 = 'Windows ì—…ë°ì´íŠ¸ ì°½ì˜ ì—…ë°ì´íŠ¸ ê³„ì†í•˜ê¸° ë²„íŠ¼ì„ í´ë¦­í•˜ì—¬ Windows ì—…ë°ì´íŠ¸ ê¸°ëŠ¥ì„ ë³µêµ¬í•˜ì‹¤ ìˆ˜ ìžˆìŠµë‹ˆë‹¤.'
 $toastDetail = @"
 <toast> 
     <visual>
