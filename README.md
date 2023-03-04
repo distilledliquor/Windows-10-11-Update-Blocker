@@ -8,5 +8,6 @@ Windows 11에서 새 레지스트리 키를 만들어야 정상적으로 차단�
 
 설정상 0000년 1월 1일 ~ 3000년 12월 31일간 중지되며 Windows 업데이트 설정의 업데이트 계속하기 버튼 클릭으로 다시 자동 업데이트를 시작할 수 있습니다.
 
-다운로드
-https://github.com/distilledliquor/Windows-10-11-Update-Blocker/releases/download/windows-11-update-blocker/Windows.10+11.Update.Blocker.exe
+다운로드는 Releases로 가시면 됩니다.
+
+다운로드 하기 전 MS Edge 기준으로 ~을(를) 신뢰할 수 있는지 확인합니다. 라는 메세지가 뜰 경우 '더 보기' 클릭 후 '그래도 계속'을 눌러서 다운로드 하시고 Windows Defender SmartScreen에선 실행, 사용자 계정 컨트롤에선 예를 눌러주시면 됩니다.
