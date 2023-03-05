@@ -16,23 +16,9 @@ New-ItemProperty -Force -Path $keyAU -PropertyType DWORD -Name 'NoAutoUpdate' -V
 }
 
 <# Completion message #>
-[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] > $null
-[Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime] > $null
-[string] $L1 = 'Windows 업데이트가 3000년 12월 31일에 다시 시작됩니다.'
-[string] $L2 = '　'
-[string] $L3 = 'Windows 업데이트 창의 업데이트 계속하기 버튼을 클릭하여 Windows 업데이트 기능을 복구하실 수 있습니다.'
-$toastDetail = @"
-<toast> 
-    <visual>
-        <binding template = "ToastImageAndText04">
-            <text id = "1">$($L1)</text>
-            <text id = "2">$($L2)</text>
-            <text id = "3">$($L3)</text>
-        </binding>
-    </visual> 
-</toast>
-"@
-$xml = New-Object Windows.Data.Xml.Dom.XmlDocument
-$xml.LoadXml($toastDetail)
-$toastNotification = [Windows.UI.Notifications.ToastNotification]::new($xml)
-[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier(' ').Show($toastNotification)
+$toast = [Windows.UI.Notifications.ToastTemplateType, Windows.UI.Notifications, ContentType = WindowsRuntime]::ToastText04
+$toastTemplate = [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::GetTemplateContent($toast)
+$toastTemplate.SelectSingleNode('//text[@id= "1"]').InnerText= 'Windows 업데이트가 3000년 12월 31일에 다시 시작됩니다.'
+$toastTemplate.SelectSingleNode('//text[@id= "2"]').InnerText= '　'
+$toastTemplate.SelectSingleNode('//text[@id= "3"]').InnerText= 'Windows 업데이트 창의 업데이트 계속하기 버튼을 클릭하여 Windows 업데이트 기능을 복구하실 수 있습니다.'
+[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier('　').Show($toastTemplate)
