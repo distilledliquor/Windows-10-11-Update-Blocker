@@ -1,7 +1,7 @@
 <# Setting registry values to stop windows update #>
 $keyUX = 'Registry::HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings'
 $keyAU = 'Registry::HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'
-$dateStart = '0000-01-01T00:00:00Z'
+$dateStart = '2000-01-01T00:00:00Z'
 $dateEnd = '3000-12-31T11:59:59Z'
 $getWinver = (Get-WmiObject -class Win32_OperatingSystem).Caption
 Set-ItemProperty -Path $keyUX -Name 'PauseFeatureUpdatesStartTime' -Value $dateStart
