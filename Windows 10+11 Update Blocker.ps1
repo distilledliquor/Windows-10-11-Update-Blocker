@@ -14,7 +14,6 @@ if ($getWinver.Contains("Windows 11")) {
 New-Item -Force -Path $keyAU > $null
 New-ItemProperty -Force -Path $keyAU -PropertyType DWORD -Name 'NoAutoUpdate' -Value 1 > $null
 }
-
 <# Completion message #>
 $toast = [Windows.UI.Notifications.ToastTemplateType, Windows.UI.Notifications, ContentType = WindowsRuntime]::ToastText04
 $toastTemplate = [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::GetTemplateContent($toast)
